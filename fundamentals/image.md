@@ -200,6 +200,11 @@ If we had only passed the colormap it would have been given a default name.
 
 The named colormap now appears in the dropdown menu alongside a little thumbnail of the full range of the colormap.
 
+
+## channel axis parameter
+Draft new section
+
+
 ## adjusting contrast limits
 
 Each image layer gets mapped through its colormap according to values called contrast limits.
