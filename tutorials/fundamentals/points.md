@@ -214,8 +214,8 @@ Points can also be resized within the GUI by first selecting them and then
 adjusting the point size slider. If no points are selected, then adjusting the
 slider value will only serve to initialize the size for new points that are
 about to be added. The value of the size of the next point to be added can be
-found in the `layer.size` property. Note this property is different from
-`layer.sizes` which contains the current sizes of all the points.
+found in the `layer.current_size` property. Note this property is different from
+`layer.size` which contains the current sizes of all the points.
 
 +++
 
