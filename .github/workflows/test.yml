@@ -8,13 +8,14 @@ on:
 jobs:
 
   test:
-    name: ${{ matrix.platform }} ${{ matrix.python }}
+    name: ${{ matrix.platform }} ${{ matrix.python }} (${{ matrix.napari_version }})
     runs-on: ${{ matrix.platform }}
     strategy:
       fail-fast: false
       matrix:
         platform: [ubuntu-latest]
         python: [3.7, 3.8, 3.9]
+        napari_version: ["stable", "master"]
 
     steps:
       - uses: actions/checkout@v2
@@ -30,12 +31,18 @@ jobs:
           sudo apt-get install -y libdbus-1-3 libxkbcommon-x11-0 libxcb-icccm4 \
             libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 \
             libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0
-          pip install pytest-xvfb
 
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt          
 
+      - name: Install napari from master
+        if: ${{ matrix.napari_version == 'master' }}
+        run: |
+          pip install git+https://github.com/napari/napari@master#egg=napari[all]
+
       - name: Test
-        run: pytest -v
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: pytest -v
